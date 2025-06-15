@@ -1,4 +1,4 @@
-import "./app/styles/index.css";
+import "./app/styles/index2.scss";
 
 console.log("Welcome to Vite Sprockets! 2");
 

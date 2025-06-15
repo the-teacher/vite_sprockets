@@ -1,0 +1,81 @@
+// Global SCSS Variables
+// Colors
+$colors: (
+  "primary": #667eea,
+  "secondary": #764ba2,
+  "accent": #f093fb,
+  "cyan-primary": #4facfe,
+  "cyan-secondary": #00f2fe,
+  "text-dark": #2d3748,
+  "text-medium": #2a4365,
+  "background-light": #f7fafc,
+  "white": #ffffff,
+);
+
+// Spacing
+$spacing: (
+  "xs": 0.5rem,
+  "sm": 1rem,
+  "md": 1.5rem,
+  "lg": 2rem,
+  "xl": 3rem,
+  "xxl": 4rem,
+);
+
+// Breakpoints
+$breakpoints: (
+  "mobile": 480px,
+  "tablet": 768px,
+  "desktop": 1024px,
+  "wide": 1200px,
+);
+
+// Shadows
+$shadows: (
+  "light": (
+    0 4px 6px rgba(0, 0, 0, 0.07),
+  ),
+  "medium": (
+    0 10px 25px rgba(0, 0, 0, 0.15),
+  ),
+  "heavy": (
+    0 20px 40px rgba(0, 0, 0, 0.25),
+  ),
+);
+
+// Border radius
+$border-radius: (
+  "sm": 8px,
+  "md": 12px,
+  "lg": 16px,
+  "xl": 24px,
+  "round": 50%,
+);
+
+// Transitions
+$transitions: (
+  "fast": 0.15s ease,
+  "normal": 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+  "slow": 0.5s ease-out,
+);
+
+// Helper functions
+@function color($name) {
+  @return map-get($colors, $name);
+}
+
+@function spacing($size) {
+  @return map-get($spacing, $size);
+}
+
+@function shadow($type) {
+  @return map-get($shadows, $type);
+}
+
+@function radius($size) {
+  @return map-get($border-radius, $size);
+}
+
+@function transition($speed) {
+  @return map-get($transitions, $speed);
+}
