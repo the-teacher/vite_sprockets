@@ -4,7 +4,8 @@
   "type": "module",
   "scripts": {
     "start": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "yarn build:clean && vite build",
+    "build:clean": "rm -rf dist",
     "preview": "vite preview"
   },
   "devDependencies": {
