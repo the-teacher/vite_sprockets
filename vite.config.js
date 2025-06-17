@@ -26,11 +26,13 @@ export default defineConfig({
         server.middlewares.use(staticAssetsMiddleware());
       },
     },
-    staticAssetsManifestPlugin(),
+    // staticAssetsManifestPlugin(),
   ],
 
   build: {
     manifest: true,
+    assetsDir: "test-assets",
+    assetsInlineLimit: 0,
 
     rollupOptions: {
       input: {
