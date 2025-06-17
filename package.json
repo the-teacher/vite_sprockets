@@ -5,16 +5,18 @@
   "scripts": {
     "start": "vite --host 0.0.0.0",
     "build": "yarn build:clean && vite build",
+    "build:debug": "DEBUG=vite:* yarn build",
     "build:clean": "rm -rf dist",
     "preview": "vite preview"
   },
   "devDependencies": {
     "sass": "^1.89.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3",
     "vite": "^6.0.0"
   },
   "packageManager": "yarn@4.9.2",
   "dependencies": {
-    "crypto": "^1.0.1",
-    "vite-plugin-static-copy": "^3.0.2"
+    "fast-glob": "^3.3.3"
   }
 }

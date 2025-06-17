@@ -2,7 +2,8 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { createAssetsMiddleware } from "./serve-static-assets.js";
+import { staticAssetsMiddleware } from "./static-assets-middleware.js";
+import { staticAssetsManifestPlugin } from "./static-assets-manifest-plugin.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -18,10 +19,14 @@ export default defineConfig({
   plugins: [
     {
       name: "serve-static-assets",
+      // prioritisation of the plugin
+      // move it to the top of the list
+      // enforce: "pre",
       configureServer(server) {
-        server.middlewares.use(createAssetsMiddleware());
+        server.middlewares.use(staticAssetsMiddleware());
       },
     },
+    staticAssetsManifestPlugin(),
   ],
 
   build: {
@@ -29,8 +34,8 @@ export default defineConfig({
 
     rollupOptions: {
       input: {
-        main: resolve(__dirname, "index.html"),
-        page2: resolve(__dirname, "index2.html"),
+        index: resolve(__dirname, "src/index.js"),
+        index2: resolve(__dirname, "src/index2.js"),
       },
     },
   },
