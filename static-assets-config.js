@@ -1,9 +1,28 @@
 // Common configuration for static assets handling
 export const STATIC_ASSETS_CONFIG = {
-  // Directory paths
-  SOURCE_DIR: "src/assets",
-  DIST_DIR: "dist/assets",
-  BASE_PATH: "/assets/",
+  // Base directories
+  SOURCE_DIR: "src",
+  DIST_DIR: "dist",
+  ASSETS_DIR: "assets", // Directory name for assets (both in source and dist)
+  MANIFEST_DIR: ".vite", // Directory for manifest file
+  MANIFEST_FILE: "manifest.json", // Manifest filename
+
+  // Computed paths based on base directories
+  get SOURCE_ASSETS_DIR() {
+    return `${this.SOURCE_DIR}/${this.ASSETS_DIR}`;
+  },
+
+  get DIST_ASSETS_DIR() {
+    return `${this.DIST_DIR}/${this.ASSETS_DIR}`;
+  },
+
+  get BASE_PATH() {
+    return `/${this.ASSETS_DIR}/`;
+  },
+
+  get MANIFEST_PATH() {
+    return `${this.MANIFEST_DIR}/${this.MANIFEST_FILE}`;
+  },
 
   // File type definitions with both MIME types and categories
   FILE_TYPES: {
