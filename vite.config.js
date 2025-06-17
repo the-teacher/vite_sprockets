@@ -41,6 +41,19 @@ export default defineConfig({
 
         index1_js: resolve(__dirname, "src/index.js"),
         index2_js: resolve(__dirname, "src/index2.js"),
+
+        unused_asset_1: resolve(
+          __dirname,
+          "app/assets/images/unused-asset-1.svg"
+        ),
+        unused_asset_2: resolve(
+          __dirname,
+          "app/assets/images/unused-asset-2.svg"
+        ),
+        unused_asset_3: resolve(
+          __dirname,
+          "app/assets/images/unused-asset-3.svg"
+        ),
       },
     },
   },
