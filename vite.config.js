@@ -4,9 +4,20 @@ import { fileURLToPath } from "url";
 import { dirname } from "path";
 import { staticAssetsMiddleware } from "./static-assets-middleware.js";
 import { staticAssetsManifestPlugin } from "./static-assets-manifest-plugin.js";
+import fg from "fast-glob";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
+
+const assetFiles = fg.sync(
+  [
+    "*.html",
+    "src/*.js",
+    "app/assets/**/*.{png,jpg,jpeg,svg,gif,html,js,css}",
+    "src/assets/**/*.{png,jpg,jpeg,svg,gif,html,js,css}",
+  ],
+  { absolute: true }
+);
 
 export default defineConfig({
   server: {
@@ -17,44 +28,36 @@ export default defineConfig({
   publicDir: "public",
 
   plugins: [
-    {
-      name: "serve-static-assets",
-      // prioritisation of the plugin
-      // move it to the top of the list
-      // enforce: "pre",
-      configureServer(server) {
-        server.middlewares.use(staticAssetsMiddleware());
-      },
-    },
+    // {
+    //   name: "serve-static-assets",
+    //   // Plugin prioritisation
+    //   // move it to the top of the list
+    //   // enforce: "pre",
+    //   configureServer(server) {
+    //     server.middlewares.use(staticAssetsMiddleware());
+    //   },
+    // },
     // staticAssetsManifestPlugin(),
   ],
 
   build: {
     manifest: true,
-    assetsDir: "test-assets",
+    assetsDir: "assets",
     assetsInlineLimit: 0,
 
     rollupOptions: {
-      input: {
-        index1_html: resolve(__dirname, "index.html"),
-        index2_html: resolve(__dirname, "index2.html"),
+      input: [
+        // HTML files
+        // resolve(__dirname, "index.html"),
+        // resolve(__dirname, "index2.html"),
 
-        index1_js: resolve(__dirname, "src/index.js"),
-        index2_js: resolve(__dirname, "src/index2.js"),
+        // JS files
+        // resolve(__dirname, "src/index.js"),
+        // resolve(__dirname, "src/index2.js"),
 
-        unused_asset_1: resolve(
-          __dirname,
-          "app/assets/images/unused-asset-1.svg"
-        ),
-        unused_asset_2: resolve(
-          __dirname,
-          "app/assets/images/unused-asset-2.svg"
-        ),
-        unused_asset_3: resolve(
-          __dirname,
-          "app/assets/images/unused-asset-3.svg"
-        ),
-      },
+        // Assets directly
+        ...assetFiles,
+      ],
     },
   },
 });
