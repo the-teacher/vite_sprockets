@@ -1,7 +1,6 @@
 import "./app/styles/index.scss";
 import "../app/assets/css/new-test-scss.scss";
 
-// Импортируем изображение для демонстрации
 import bannerImage from "../app/assets/images/app-banner.jpg";
 
 console.log("Welcome to Vite Sprockets! 1");
@@ -13,7 +12,6 @@ document.addEventListener("DOMContentLoaded", () => {
   if (app) {
     console.log("App initialized successfully (1)");
 
-    // Создаем элемент для показа импортированного изображения
     const importedImg = document.createElement("img");
     importedImg.src = bannerImage;
     importedImg.alt = "Imported Banner";

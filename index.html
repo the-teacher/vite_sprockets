@@ -5,8 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Modern Gallery - Page 1</title>
 
-    <!-- /@vite/client-->
-    <script type="module" src="/@vite/client"></script>
+    <!-- @vite/client-->
+    <!-- In production produces: "ReferenceError: __DEFINES__ is not defined" -->
+    <!-- Do not forget to remove it before build -->
+    <script type="module" src="@vite/client"></script>
     <!-- end /@vite/client-->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
