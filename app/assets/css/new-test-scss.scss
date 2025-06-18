@@ -1,0 +1,10 @@
+.new-test-scss {
+  color: red;
+  border: 5px solid red;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background-image: url("../images/app-banner.jpg");
+  object-fit: cover;
+  background-size: contain;
+}

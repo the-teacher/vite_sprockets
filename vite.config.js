@@ -2,8 +2,6 @@ import { defineConfig } from "vite";
 import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
-import { staticAssetsMiddleware } from "./static-assets-middleware.js";
-import { staticAssetsManifestPlugin } from "./static-assets-manifest-plugin.js";
 import fg from "fast-glob";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -27,35 +25,41 @@ export default defineConfig({
   // Static assets from public folder (like Rails public/assets)
   publicDir: "public",
 
-  plugins: [
-    // {
-    //   name: "serve-static-assets",
-    //   // Plugin prioritisation
-    //   // move it to the top of the list
-    //   // enforce: "pre",
-    //   configureServer(server) {
-    //     server.middlewares.use(staticAssetsMiddleware());
-    //   },
-    // },
-    // staticAssetsManifestPlugin(),
-  ],
+  resolve: {
+    alias: {
+      // Aliases to resolve paths in SCSS files
+      // Also could be used for other assets
+      "@": resolve(__dirname, "src"),
+      "@app": resolve(__dirname, "app"),
+      app: resolve(__dirname, "app"),
+    },
+  },
+
+  css: {
+    preprocessorOptions: {
+      scss: {
+        // Add paths to resolve paths in SCSS files
+        includePaths: [
+          resolve(__dirname, "app/assets"),
+          resolve(__dirname, "src/assets"),
+        ],
+      },
+    },
+  },
+
+  plugins: [],
 
   build: {
+    // Define manifest.json file. Will be like: dist/.vite/manifest.json
     manifest: true,
+    // Define assets directory. Will be like: dist/assets/index-BAxCH499.js
     assetsDir: "assets",
+    // Do not inline assets
     assetsInlineLimit: 0,
 
     rollupOptions: {
       input: [
-        // HTML files
-        // resolve(__dirname, "index.html"),
-        // resolve(__dirname, "index2.html"),
-
-        // JS files
-        // resolve(__dirname, "src/index.js"),
-        // resolve(__dirname, "src/index2.js"),
-
-        // Assets directly
+        // define Asset files directly
         ...assetFiles,
       ],
     },
