@@ -3,6 +3,7 @@ import { resolve } from "path";
 import { fileURLToPath } from "url";
 import { dirname } from "path";
 import fg from "fast-glob";
+import react from "@vitejs/plugin-react";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -11,6 +12,7 @@ const assetFiles = fg.sync(
   [
     "*.html",
     "src/*.js",
+    "src/*.jsx",
     "app/assets/**/*.{png,jpg,jpeg,svg,gif,html,js,css}",
     "src/assets/**/*.{png,jpg,jpeg,svg,gif,html,js,css}",
   ],
@@ -18,6 +20,8 @@ const assetFiles = fg.sync(
 );
 
 export default defineConfig({
+  plugins: [react()],
+
   server: {
     host: "0.0.0.0",
   },
@@ -46,8 +50,6 @@ export default defineConfig({
       },
     },
   },
-
-  plugins: [],
 
   build: {
     // Define manifest.json file. Will be like: dist/.vite/manifest.json
